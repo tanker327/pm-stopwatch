@@ -94,7 +94,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw new Error('Stopwatch is running. You cannot start it again.');
 	      }
 	      var currentTime = this[startTime] = this[stopTime] = Date.now();
-	      this[setHistory](message, currentTime);
+	      this[setHistory](message, currentTime, 'start');
 	      this[status] = STATUS.RUNNING;
 	    }
 	  }, {
@@ -103,7 +103,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!this.isRunning) {
 	        throw new Error('Stopwatch is not running. You cannot stop it.');
 	      }
-	      this[setHistory](message);
+	      this[setHistory](message, Date.now(), 'stop');
 	      this[stopTime] = Date.now();
 	      this[status] = STATUS.STOPPED;
 	      return this[stopTime] - this[startTime];
@@ -127,12 +127,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: setHistory,
 	    value: function value(message) {
 	      var currentTime = arguments.length <= 1 || arguments[1] === undefined ? Date.now() : arguments[1];
+	      var type = arguments.length <= 2 || arguments[2] === undefined ? 'lap' : arguments[2];
 	
 	      if (this.isStopped) {
 	        throw new Error("The stopwatch is stopped. You can set history");
 	      }
 	
 	      var lapInfo = {
+	        type: type,
 	        message: message,
 	        timestamp: currentTime,
 	        lapTime: currentTime - this[stopTime]
