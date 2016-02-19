@@ -1,0 +1,14 @@
+{
+  "name": "pm-stopwatch",
+  "description": "Performance meatrue stop watch. The best stopwatch ever!",
+  "main": "dist/pm-stopwatch.js",
+  "author": {
+    "name": "Eric Wu",
+    "email": "tanker327@gmail.com"
+  },
+  "license": "MIT",
+  "moduleType": [
+    "amd","node","globals"
+  ],
+  "homepage": ""
+}

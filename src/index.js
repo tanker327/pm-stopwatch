@@ -1,4 +1,4 @@
-const startTime = Symbol('start_imte');
+const startTime = Symbol('start_time');
 const stopTime = Symbol('stop_time');
 const status = Symbol('running_status');
 const history = Symbol('history');
@@ -30,11 +30,13 @@ export default class Stopwatch {
   }
 
   stop(message) {
-    if (this.isRunning) {
+    if (!this.isRunning) {
       throw new Error('Stopwatch is not running. You cannot stop it.')
     }
     this[setHistory](message);
+    this[stopTime] = Date.now();
     this[status] = STATUS.STOPPED;
+    return this[stopTime] - this[startTime];
   }
 
   reset() {
@@ -46,23 +48,26 @@ export default class Stopwatch {
     if (!this.isRunning) {
       throw new Error('Stopwatch is not running.')
     }
-    return this[setHistory](message);
+
+    return this[setHistory](message).lapTime;
   }
 
   [setHistory](message, currentTime = Date.now()){
     if(this.isStopped) {
       throw new Error ("The stopwatch is stopped. You can set history");
     }
+
     let lapInfo = {
       message:message,
       timestamp : currentTime,
       lapTime : currentTime - this[stopTime]
     };
+    this[stopTime] = currentTime;
     this[history].push(lapInfo);
     return lapInfo;
   }
 
-  getHistory(){
+  getLapHistory(){
     return this[history];
   }
 

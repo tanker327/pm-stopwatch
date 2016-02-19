@@ -2,11 +2,11 @@
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define("pm-stopwatch", [], factory);
+		define("PMStopwatch", [], factory);
 	else if(typeof exports === 'object')
-		exports["pm-stopwatch"] = factory();
+		exports["PMStopwatch"] = factory();
 	else
-		root["pm-stopwatch"] = factory();
+		root["PMStopwatch"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -64,7 +64,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var startTime = Symbol('start_imte');
+	var startTime = Symbol('start_time');
 	var stopTime = Symbol('stop_time');
 	var status = Symbol('running_status');
 	var history = Symbol('history');
@@ -100,11 +100,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'stop',
 	    value: function stop(message) {
-	      if (this.isRunning) {
+	      if (!this.isRunning) {
 	        throw new Error('Stopwatch is not running. You cannot stop it.');
 	      }
 	      this[setHistory](message);
+	      this[stopTime] = Date.now();
 	      this[status] = STATUS.STOPPED;
+	      return this[stopTime] - this[startTime];
 	    }
 	  }, {
 	    key: 'reset',
@@ -118,7 +120,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!this.isRunning) {
 	        throw new Error('Stopwatch is not running.');
 	      }
-	      return this[setHistory](message);
+	
+	      return this[setHistory](message).lapTime;
 	    }
 	  }, {
 	    key: setHistory,
@@ -128,17 +131,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (this.isStopped) {
 	        throw new Error("The stopwatch is stopped. You can set history");
 	      }
+	
 	      var lapInfo = {
 	        message: message,
 	        timestamp: currentTime,
 	        lapTime: currentTime - this[stopTime]
 	      };
+	      this[stopTime] = currentTime;
 	      this[history].push(lapInfo);
 	      return lapInfo;
 	    }
 	  }, {
-	    key: 'getHistory',
-	    value: function getHistory() {
+	    key: 'getLapHistory',
+	    value: function getLapHistory() {
 	      return this[history];
 	    }
 	  }, {

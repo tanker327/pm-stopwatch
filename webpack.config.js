@@ -3,15 +3,15 @@ var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 var path = require('path');
 var env = require('yargs').argv.mode;
 
-var libraryName = 'pm-stopwatch';
+var fileName = 'pm-stopwatch';
 
 var plugins = [], outputFile;
 
 if (env === 'build') {
   plugins.push(new UglifyJsPlugin({ minimize: true }));
-  outputFile = libraryName + '.min.js';
+  outputFile = fileName + '.min.js';
 } else {
-  outputFile = libraryName + '.js';
+  outputFile = fileName + '.js';
 }
 
 var config = {
@@ -20,7 +20,7 @@ var config = {
   output: {
     path: __dirname + '/dist',
     filename: outputFile,
-    library: libraryName,
+    library: "PMStopwatch",
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

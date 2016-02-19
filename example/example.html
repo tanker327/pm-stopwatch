@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script type="text/javascript" src="../dist/pm-stopwatch.min.js"></script>
+  <script type="text/javascript">
+
+    var watch = new stopwatch();
+
+  </script>
+</head>
+<body>
+<div>
+  <button id="start" onclick="console.log('watch start');watch.start()">start</button>
+  <button id="stop" onclick="console.log('stop: '+watch.stop())">stop</button>
+  <button id="lap" onclick="console.log('lap: ' + watch.lap())">lap</button>
+  <button id="show_lap_histoy" onclick="console.log('here is the detail of lap history',watch.getLapHistory())">show lap history</button>
+  <button id="reset" onclick="watch.reset();console.log('watch reset')">rest</button>
+
+  <div class="screen">
+    please check the output in your console.
+  </div>
+
+
+</div>
+
+</body>
+</html>
