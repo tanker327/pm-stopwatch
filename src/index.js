@@ -25,7 +25,7 @@ export default class Stopwatch {
       throw new Error('Stopwatch is running. You cannot start it again.');
     }
     let currentTime = this[startTime] = this[stopTime] = Date.now();
-    this[setHistory](message, currentTime);
+    this[setHistory](message, currentTime, 'start');
     this[status] = STATUS.RUNNING;
   }
 
@@ -33,7 +33,7 @@ export default class Stopwatch {
     if (!this.isRunning) {
       throw new Error('Stopwatch is not running. You cannot stop it.')
     }
-    this[setHistory](message);
+    this[setHistory](message, Date.now(), 'stop');
     this[stopTime] = Date.now();
     this[status] = STATUS.STOPPED;
     return this[stopTime] - this[startTime];
@@ -52,12 +52,13 @@ export default class Stopwatch {
     return this[setHistory](message).lapTime;
   }
 
-  [setHistory](message, currentTime = Date.now()){
+  [setHistory](message, currentTime = Date.now(),type = 'lap'){
     if(this.isStopped) {
       throw new Error ("The stopwatch is stopped. You can set history");
     }
 
     let lapInfo = {
+      type:type,
       message:message,
       timestamp : currentTime,
       lapTime : currentTime - this[stopTime]
