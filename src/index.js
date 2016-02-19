@@ -1,3 +1,5 @@
+import Events from 'Events'
+
 const startTime = Symbol('start_time');
 const stopTime = Symbol('stop_time');
 const status = Symbol('running_status');
@@ -11,8 +13,9 @@ const STATUS = {
 };
 
 
-export default class Stopwatch {
+export default class Stopwatch extends Events.EventEmitter{
   constructor() {
+    super();
     this[status] = STATUS.UNSTARTED;
     this[history] = [];
   }
@@ -25,31 +28,35 @@ export default class Stopwatch {
       throw new Error('Stopwatch is running. You cannot start it again.');
     }
     let currentTime = this[startTime] = this[stopTime] = Date.now();
-    this[setHistory](message, currentTime, 'start');
+    let record = this[setHistory](message, currentTime, 'start');
     this[status] = STATUS.RUNNING;
+    this.emit(Stopwatch.Event.START, record);
   }
 
   stop(message) {
     if (!this.isRunning) {
       throw new Error('Stopwatch is not running. You cannot stop it.')
     }
-    this[setHistory](message, Date.now(), 'stop');
+    let record = this[setHistory](message, Date.now(), 'stop');
     this[stopTime] = Date.now();
     this[status] = STATUS.STOPPED;
+    this.emit(Stopwatch.Event.STOP, record);
     return this[stopTime] - this[startTime];
   }
 
   reset() {
     this[status] = STATUS.UNSTARTED;
     this[history].length = 0; // fast way to clean array
+    this.emit(Stopwatch.Event.RESET);
   }
 
   lap(message){
     if (!this.isRunning) {
       throw new Error('Stopwatch is not running.')
     }
-
-    return this[setHistory](message).lapTime;
+    let record = this[setHistory](message);
+    this.emit(Stopwatch.Event.LAP, record);
+    return record.lapTime;
   }
 
   [setHistory](message, currentTime = Date.now(),type = 'lap'){
@@ -112,3 +119,9 @@ export default class Stopwatch {
   }
 }
 
+Stopwatch.Event  = {
+  START,
+  STOP,
+  LAP,
+  RESET
+}
