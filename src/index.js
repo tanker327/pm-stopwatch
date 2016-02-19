@@ -83,7 +83,7 @@ export default class Stopwatch extends Events.EventEmitter{
     if(this.isRunning){
       return Date.now() - this.startTime;
     }else if(this.isStopped) {
-      return this.startTime - this.stopTime;
+      return this.stopTime - this.startTime;
     }else{
       return 0;
     }
