@@ -64,15 +64,15 @@ export default class Stopwatch extends Events.EventEmitter{
       throw new Error ("The stopwatch is stopped. You can set history");
     }
 
-    let lapInfo = {
+    let record = {
       type:type,
       message:message,
       timestamp : currentTime,
       lapTime : currentTime - this[stopTime]
     };
     this[stopTime] = currentTime;
-    this[history].push(lapInfo);
-    return lapInfo;
+    this[history].push(record);
+    return record;
   }
 
   getLapHistory(){
