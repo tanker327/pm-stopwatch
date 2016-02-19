@@ -220,10 +220,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	
 	Stopwatch.Event = {
-	  START: START,
-	  STOP: STOP,
-	  LAP: LAP,
-	  RESET: RESET
+	  START: Symbol('START'),
+	  STOP: Symbol('STOP'),
+	  LAP: Symbol('LAP'),
+	  RESET: Symbol('RESET')
 	};
 	module.exports = exports['default'];
 

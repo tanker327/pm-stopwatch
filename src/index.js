@@ -120,8 +120,8 @@ export default class Stopwatch extends Events.EventEmitter{
 }
 
 Stopwatch.Event  = {
-  START,
-  STOP,
-  LAP,
-  RESET
+  START : Symbol('START'),
+  STOP : Symbol('STOP'),
+  LAP : Symbol('LAP'),
+  RESET : Symbol('RESET')
 }
