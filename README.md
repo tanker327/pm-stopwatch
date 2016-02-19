@@ -12,11 +12,11 @@ stopwatch.lap(message);
 stopwatch.reset(message);  
 stopwatch.getLapHistory();   
 
-stopwatch.displayTime();  
-stopwatch.startTime();  
-stopwatch.stopTime();  
+stopwatch.displayTime;  
+stopwatch.startTime;  
+stopwatch.stopTime;  
 
-stopwatch.isStarted();  
-stopwatch.isStopped();  
-stopwatch.isRunning();  
+stopwatch.isStarted;  
+stopwatch.isStopped;  
+stopwatch.isRunning;  
 
