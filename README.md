@@ -27,7 +27,7 @@ stopwatch.isStopped;
 stopwatch.isRunning;  
 ```  
 
-## Detial of historyInfo
+## Detail of historyInfo
 Run stopwatch.getLapHistory(), you will get data like below.
 ```js
 [{
@@ -54,6 +54,11 @@ Run stopwatch.getLapHistory(), you will get data like below.
 ```
 ##Example
 Please check example folder to see how to use it.
+
+##test
+```
+npm test
+```
 
 ## License
 
