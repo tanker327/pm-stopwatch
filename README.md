@@ -1,6 +1,6 @@
 # PM-Stopwatch (Performance measure stopwatch)
 
-A javascript lib for both nodejs and web. It can used for performane measure, loging, or create a stopwatch application.
+A javascript lib for both nodejs and web. It can used for performance measure, logging, or create a stopwatch application.
 
 # Functions:
 
@@ -52,3 +52,9 @@ Run stopwatch.getLapHistory(), you will get data like below.
     lapTime: 6
 }]
 ```
+##Example
+Please check example folder to see how to use it.
+
+## License
+
+MIT &copy; 2014 Eric Wu
