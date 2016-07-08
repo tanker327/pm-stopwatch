@@ -152,15 +152,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw new Error("The stopwatch is stopped. You can set history");
 	      }
 	
-	      var lapInfo = {
+	      var record = {
 	        type: type,
 	        message: message,
 	        timestamp: currentTime,
 	        lapTime: currentTime - this[stopTime]
 	      };
 	      this[stopTime] = currentTime;
-	      this[history].push(lapInfo);
-	      return lapInfo;
+	      this[history].push(record);
+	      return record;
 	    }
 	  }, {
 	    key: 'getLapHistory',
@@ -173,7 +173,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (this.isRunning) {
 	        return Date.now() - this.startTime;
 	      } else if (this.isStopped) {
-	        return this.startTime - this.stopTime;
+	        return this.stopTime - this.startTime;
 	      } else {
 	        return 0;
 	      }
