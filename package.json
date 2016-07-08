@@ -1,8 +1,10 @@
 {
   "name": "pm-stopwatch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Performance meatrue stop watch. The best stopwatch ever!",
   "main": "dist/pm-stopwatch.js",
+  "homepage": "https://github.com/tanker327/pm-stopwatch",
+  "bugs": "https://github.com/tanker327/pm-stopwatch/issues",
   "scripts": {
     "build": "webpack --mode=build",
     "dev": "webpack --progress --colors --mode=dev",
